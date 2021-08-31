@@ -29,7 +29,7 @@ class CustomerApiSimulation extends Simulation {
       .check(status is 200))
 
     .exec(http("Update Customer")
-      .put("/rvy/api//cm/v1/customers")
+      .put("/rvy/api/cm/v1/customers")
       .body(RawFileBody(filePath = "./src/test/resources/bodies/putCustomer.json")).asJson
       .header(name="content-type",value = "application/json")
       .check(status is 200))
