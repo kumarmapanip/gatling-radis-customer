@@ -1,17 +1,11 @@
 pipeline {
     agent any 
     stages {
-	stage('Build Maven'){
-		steps{
-			echo 'Project compile stage'
-			bat label: 'Compilation running', script: '''mvn clean package'''
-	       	}
-	}
 	
-	stage('Run Gatling') {
+	stage('Performance Test') {
 	   steps {
-			echo 'Project Performance Testing stage'
-			bat label: 'Test running', script: '''mvn gatling:test'''
+			
+			sh 'cd product-service-gatling; mvn gatling:test'
 	       
        		}
 		post {
@@ -19,7 +13,7 @@ pipeline {
                     gatlingArchive()
                 }
             }
-		}      	
+	}      	
 	    
    }
 }
