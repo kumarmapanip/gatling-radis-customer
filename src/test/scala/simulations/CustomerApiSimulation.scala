@@ -6,7 +6,7 @@ import io.gatling.http.Predef._
 class CustomerApiSimulation extends Simulation {
 
   //conf
-  val value_conf = http.baseUrl("http://localhost:9292")
+  val value_conf = http.baseUrl("ttps://api.rvymart.com:443")
     .header("Accept",value="application/json")
     .header(name="content-type", value ="application/json")
 
@@ -15,21 +15,21 @@ class CustomerApiSimulation extends Simulation {
   val scn = scenario("Customer Management Api operations")
 
     .exec(http("Get all Customer details")
-      .get("/rvy/api//cm/v1/customers")
+      .get("/cs/rvy/api/cm/v1/customers")
       .check(status is 200))
 
     .exec(http("Insert Customer")
-      .post("/rvy/api//cm/v1/customers")
+      .post("/rvy/api/cm/v1/customers")
       .body(RawFileBody(filePath = "./src/test/resources/bodies/addCustomer.json")).asJson
       .header(name="content-type",value = "application/json")
       .check(status is 200))
 
-    .exec(http("Get by id")
-      .get("/rvy/api//cm/v1/customers/1")
-      .check(status is 200))
+//     .exec(http("Get by id")
+//       .get("/rvy/api//cm/v1/customers/1")
+//       .check(status is 200))
 
     .exec(http("Update Customer")
-      .put("/rvy/api/cm/v1/customers")
+      .put("/cs/rvy/api/cm/v1/customers")
       .body(RawFileBody(filePath = "./src/test/resources/bodies/putCustomer.json")).asJson
       .header(name="content-type",value = "application/json")
       .check(status is 200))
