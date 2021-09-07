@@ -28,17 +28,17 @@ class CustomerApiSimulation extends Simulation {
 //       .get("/rvy/api//cm/v1/customers/1")
 //       .check(status is 200))
 
-    .exec(http("Update Customer")
-      .put("/cs/rvy/api/cm/v1/customers")
-      .body(RawFileBody(filePath = "./src/test/resources/bodies/putCustomer.json")).asJson
-      .header(name="content-type",value = "application/json")
-      .check(status is 200))
+//     .exec(http("Update Customer")
+//       .put("/cs/rvy/api/cm/v1/customers")
+//       .body(RawFileBody(filePath = "./src/test/resources/bodies/putCustomer.json")).asJson
+//       .header(name="content-type",value = "application/json")
+//       .check(status is 200))
 
 
 
   //setup
-  setUp(scn.inject(atOnceUsers(users=60))).protocols(value_conf)
-
+  //setUp(scn.inject(atOnceUsers(users=60))).protocols(value_conf)
+  setUp(scn.inject(constantConcurrentUsers(100) during(6))).protocols(value_conf)
 
 
 }
