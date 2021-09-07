@@ -5,7 +5,7 @@ pipeline {
 	stage('Performance Test') {
 	   steps {
 			
-			sh 'cd product-service-gatling; mvn gatling:test'
+			sh 'mvn gatling:test'
 	       
        		}
 		post {
