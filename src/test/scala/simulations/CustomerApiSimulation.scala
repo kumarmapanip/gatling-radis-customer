@@ -6,7 +6,7 @@ import io.gatling.http.Predef._
 class CustomerApiSimulation extends Simulation {
 
   //conf
-  val value_conf = http.baseUrl("ttps://api.rvymart.com:443")
+  val value_conf = http.baseUrl("https://api.rvymart.com:443")
     .header("Accept",value="application/json")
     .header(name="content-type", value ="application/json")
 
@@ -19,7 +19,7 @@ class CustomerApiSimulation extends Simulation {
       .check(status is 200))
 
     .exec(http("Insert Customer")
-      .post("/rvy/api/cm/v1/customers")
+      .post("/cs/rvy/api/cm/v1/customers")
       .body(RawFileBody(filePath = "./src/test/resources/bodies/addCustomer.json")).asJson
       .header(name="content-type",value = "application/json")
       .check(status is 200))
