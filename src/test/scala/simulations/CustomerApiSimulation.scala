@@ -38,7 +38,10 @@ class CustomerApiSimulation extends Simulation {
 
   //setup
   //setUp(scn.inject(atOnceUsers(users=60))).protocols(value_conf)
-  setUp(scn.inject(constantConcurrentUsers(100) during(6))).protocols(value_conf)
+  setUp(scn.inject(constantConcurrentUsers(100) during(10)),
+                  rampConcurrentUsers(100).to(200).during(100)
+       
+       ).protocols(value_conf)
 
 
 }
